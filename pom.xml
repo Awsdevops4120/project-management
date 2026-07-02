@@ -1,0 +1,17 @@
+cd /opt/project -> pom.xml
+
+1. mvn validate      -> validate
+2. mvn clean         -> validate, clean
+3. mvn compile       -> validate, clean, compile
+4. mvn test          -> validate, clean, compile, test
+5. mvn package       -> validate, clean, compile, test, package
+6. mvn install       -> validate, clean, compile, test, package, install
+7. mvn deploy        -> validate, clean, compile, test, package, install, deploy
+
+* mvn clean          -> clean(plugin):clean(command)
+* mvn clean install 
+* mvn package deploy
+
+Integrations with maven:
+  *sonarqube - sonar:sonar
+  *tomcat - tomcat7:deploy
