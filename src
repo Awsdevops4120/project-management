@@ -1,1 +1,17 @@
+Github project:
 
+sudo su
+yum install git -y
+git clone https://github.com/Awsdevops4120/frontend-automation-application.git
+
+
+=========================================================================================================================
+Directory Structure of Maven Installations:
+=========================================================================================================================
+1. /opt/maven/conf:
+
+2. /opt/maven/bin:
+
+3. /opt/maven/boot:
+
+4. /opt/maven/lib:
