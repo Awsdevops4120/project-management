@@ -1,0 +1,210 @@
+                                                     MAVEN
+Overview of Maven
+Maven Architecture
+=========================================================================================================================
+Installation of Maven 
+Maven Goals 
+Maven commands 
+Project Execution via commands 
+Directory Structure via Maven Installation 
+Directory Structure of Maven Project 
+=========================================================================================================================
+Explanation about pom.xml?
+Creation of Maven Project from scratch
+Scenarios of Maven project creation 
+=========================================================================================================================
+Maven is an build tool used for build and execution of the code which downloads the dependencies automatically before the build without human intervention.
+Maven provides user friendly commands for compilation of the code, running test cases and packaging the artifacts.
+Maven also integrates with various tools of Dev, Devops and QA tools.
+Maven integrates with sonarqube for scanning, 
+                      jfrog for artifact storage
+                      and tomcat for deployment.
+
+eg: Developer: Develop /Write the code 
+               Push the code to Github
+
+    Devops: Clone the Github Repository
+            We need an build tool for build and execution of the code? - Maven
+
+--------------------------------------
+Why Maven?
+--------------------------------------
+Eg: Ecommerce-website:
+   * login-feature
+   * logout-feature
+   * Add-to-cart
+   * Payment-method
+   * Product catalog
+   * Acknowledgment
+
+Feature: login-feature -> branch(login-page): login.java
+                                              login-password.java
+                                              login-security.java
+----------------------------------
+Traditional system: Linux/Windows
+----------------------------------
+Pre-requsite: Java Installation
+
+* compilation process: javac login.java -> Generate an login.class -> 1 & 0 - binary lang -> hardware for process it.
+
+* Interpretation process: output of the code
+
+*Dependencies: piece of code for using certain in-built functionality to easy development.
+               Jars and Plugins - in-built
+               Downloading manually in-hand before build and execution of the code.
+                eg: 1 jar - 1000 jars
+                     compatible jar - work or not
+
+*Test cases Execution: Develop the test cases for every line of the code for line by line verefication of the code.
+                       Framework - junit, munit etc 
+                       
+                       eg: login.java -> loginTest.java -> loginTest.class
+
+*Bundle of the code: Generate an artifact(software) in the form of .jar/.war
+                     eg: ecommerce-website-myntra.war
+                         login.jar
+WAR - web archive (code plus web files)
+-JAR - java archive
+=========================================================================================================================
+Maven Architecture:
+=========================================================================================================================
+ 1. Local repository: /root/.m2/repository
+
+ 2. Central repository: Public repository - https://repo1.maven.org/maven2/
+ 
+ 3. Remote repository: Private repository - Jfrog Artifactory
+
+ 4. Site: Documentation (optional)
+
+=========================================================================================================================
+Installation of Maven:
+=========================================================================================================================
+Infrastructure requirement :
+               Instance: 1 Machane
+               OS : Redhat 9
+               Instance type: t2.micro ( 1 cpu & 1 GB RAM)
+               Hard disk : 10 GB
+
+1. Pre-requisite: Install java( java -> JVM(java virtual machine) -> create processed -> share process id to kernel ->
+kernel will share the required cpu & ram to Maven for processing.
+
+sudo su
+nohup yum install java-21* -y &
+yum install wget -y
+java -version
+
+2.Download the maven from official website:(https://maven.apache.org/download.cgi)
+cd /opt
+wget https://dlcdn.apache.org/maven/maven-3/3.9.16/binaries/apache-maven-3.9.16-bin.tar.gz
+tar -xvf apache-maven-3.9.16-bin.tar.gz
+mv apache-maven-3.9.16 maven
+rm -rf apache-maven-3.9.16.tar.gz
+
+Note: verify mvn --version (bash: mvn not found)
+       -> cd /opt/maven/bin
+            ./mvn --version ( this gives output)
+      verify: echo ${PATH}
+
+3.Set the path for maven to run from any location:
+
+vi /etc/profile.d/maven.sh
+export MAVEN_HOME=/opt/maven
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+export PATH=${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${PATH}
+
+source /etc/profile.d/maven.sh  // load files and reflect changes in OS.
+
+4. mvn --version  //run from any location
+=========================================================================================================================
+Maven Goals: goals are nothing but plugins which provides some functionality to perform maven operations.
+=========================================================================================================================
+1. validate: all required files are avalible before build operation.
+    eg: pom.xml          ( dependencies)
+        src directory    ( contains java like a source code to build the application) 
+
+2. clean: cleans the output directory called "target directory" which contains artifacts, test case results, classes directories etc
+           
+          eg: /opt/project/target -> .jar/.war , test-suites.xml, .class files etc
+
+3. compile: generates an .class -> 1's & 0's binary code -> hardware to process it.
+
+            eg: login.java -> login.class
+
+4. test: Executing the test cases for verifying line by line code inside the .java files for checking any kind of errors etc
+         generates an Test.class -> 1's & 0's binary code -> hardware to process it.
+         
+         eg: login.java -> loginTest.java -> loginTest.class
+
+5. package: Generating artifact in the form .jar or .war which contains the compile code.
+
+           eg: ecommerce-website-myntra.war
+               login.jar
+
+6. install: Copies the generated artifact form target directory to output directory.
+
+            eg: /opt/project/target/ecommerce-website-myntra.war -> /root/.m2/repository/ecommerce-website-myntra.war
+
+7. deploy: Uploading or storing the artifact(.jar/.war) to artifactory storage(it is a storage location where you store all the soft wares) i.e jfrog.
+
+Integrations with maven:
+  *sonarqube - sonar:sonar
+  *tomcat - tomcat7:deploy
+  *jfrog: deploy
+
+=========================================================================================================================
+Maven Commands:
+=========================================================================================================================
+cd /opt/project -> pom.xml
+
+1. mvn validate      -> validate
+2. mvn clean         -> validate, clean
+3. mvn compile       -> validate, clean, compile
+4. mvn test          -> validate, clean, compile, test
+5. mvn package       -> validate, clean, compile, test, package
+6. mvn install       -> validate, clean, compile, test, package, install
+7. mvn deploy        -> validate, clean, compile, test, package, install, deploy
+
+* mvn clean          -> clean(plugin):clean(command)
+* mvn clean install 
+* mvn package deploy
+
+Integrations with maven:
+  *sonarqube - sonar:sonar
+  *tomcat - tomcat7:deploy
+  *jfrog: deploy
+
+=========================================================================================================================
+Project Execution via Maven commands:
+=========================================================================================================================
+Github project:
+
+sudo su
+yum install git -y
+git clone https://github.com/Awsdevops4120/frontend-automation-application.git
+
+
+=========================================================================================================================
+Directory Structure of Maven Installations:
+=========================================================================================================================
+1. /opt/maven/conf:
+
+2. /opt/maven/bin:
+
+3. /opt/maven/boot:
+
+4. /opt/maven/lib:
+
+
+Log level: info
+           debug
+           error
+           warn
+
+=========================================================================================================================
+Directory Structure of Maven Project 
+=========================================================================================================================
+
+
+
+
+
